@@ -1,0 +1,17 @@
+{
+  "appenders": [
+    {
+      "type": "file",
+      "filename": "logs/metroexam_server.log",
+			"layout": {
+				"type": "basic"
+			},
+      "maxLogSize": 102400,
+      "backups": 3
+    },
+		{
+			"type": "console"
+		}
+		
+  ]
+}

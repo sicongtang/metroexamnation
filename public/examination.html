@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>地铁概论通用模块</title>
+
+<!--JQUERY UI  -->
+<!--
+<link href="js/plugs/jquery/jquery-ui-1.9.0.custom/css/mycss/jquery-ui-1.9.2.custom.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/plugs/jquery/jquery-ui-1.9.0.custom/js/jquery-1.8.2.js"></script>
+<script type="text/javascript" src="js/plugs/jquery/jquery-ui-1.9.0.custom/js/jquery-ui-1.9.0.custom.js"></script>
+<script type="text/javascript" src="js/plugs/jquery/jquery.cookie.js"></script>
+-->
+<link href="js/plugs/jquery/jquery-ui-1.10.4/css/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/plugs/jquery/jquery-ui-1.10.4/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="js/plugs/jquery/jquery-ui-1.10.4/js/jquery-ui-1.10.4.js"></script>
+
+<script type="text/javascript" src="js/plugs/ckeditor/ckeditor.js"></script>
+
+<link href="js/plugs/validate/jquery.validate.css" type="text/css" rel="stylesheet" />
+<script src="js/plugs/validate/jquery.validate.js" type="text/javascript"></script>
+<script src="js/plugs/validate/messages_cn.js" type="text/javascript"></script>
+<script src="js/plugs/validate/jquery.metadata.js" type="text/javascript"></script>
+
+
+<link href="css/templatemo_style.css" rel="stylesheet" type="text/css" />
+<link href="css/default.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="js/common/dialog-common.js"></script>
+<script src="js/loadSingleQuestion.js" type="text/javascript"></script>
+<script src="js/loadMultipleQuestion.js" type="text/javascript"></script>
+<script src="js/exam_func.js" type="text/javascript"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="keywords" content="地铁概论通用模块" />
+<meta name="description" content="地铁概论通用模块" />
+
+<link href="css/response.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				$("#jcaptchaImg").click(function() {
+					$("#jcaptchaImg").attr("src", "/jcaptcha.action");
+				});
+
+				var errorCode = "";
+				if (errorCode != null && errorCode != "") {
+					notify("验证码不正确", "color-A2272B");
+				}
+				function notify(msg, fontColor) {
+					//var msg = "保存成功";
+					$("<div>").appendTo(document.body).text(msg).addClass(
+							"notification ui-state-default ui-corner-bottom "
+									+ fontColor).position({
+						my : "center top",
+						at : "center top",
+						of : window
+					}).show({
+						effect : "blind"
+					}).delay(5000).hide({
+						effect : "blind",
+						duration : "slow"
+					}, function() {
+						$(this).remove();
+					});
+				}
+
+				/** 点击ck **/
+				$(".rd_ck").click(function() {
+					var inputCk = $(this).parents("li").find("input");
+					var ck = $(inputCk).attr("checked");
+					if (ck) {
+						$(inputCk).attr("checked", false);
+					} else {
+						$(inputCk).attr("checked", true);
+					}
+				});
+
+				//
+				/* 
+				$("#subSurveyAnswer").click(function(){
+					var inputVal=$("input[name='jcaptchaInput']").val();
+					if(inputVal==null || inputVal==""){
+						alert("请输入验证码!");
+						return false;
+					}
+					alert('ss');
+					var url="/jcaptcha!ajaxCheckCode.action";
+					var data="code="+inputVal;
+					$.ajax({
+						url : url,
+						data : data,
+						type : "POST",
+						success : function(msg){
+							alert(msg);
+						}
+					});
+					$("#jcaptchaImg").attr("src","/jcaptcha.action");
+					return false;
+				}); */
+
+			});
+</script>
+
+<style type="text/css">
+body,.content-list {
+	background: none ! important;
+}
+</style>
+</head>
+<body>
+	<div id="top_anchor"></div>
+	<div class="root-body" style="padding-top: 20px;">
+
+		<div class="middle-body" style="padding-top: 10px;">
+			<form action="/nosm/response!save.action" method="post">
+				<input type="hidden" name="surveyId" value="2c9182af458848340145891b961c0002" />
+				<div class="middle-body-title">
+					<div class="top-body-content-logo">
+						<img alt="地铁测试题" src="images/logo/logo2.png" width="1150" height="140">
+					</div>
+					<h3>&nbsp;</h3>
+					<p>
+					<p>&nbsp;</p>
+					</p>
+					<div style="clear: both;"></div>
+				</div>
+				<div id="login-dialog-form" title="请输入您的信息:">
+					<p class="validateTips"></p>
+
+					<label for="nationalid">身份证号码</label>
+					<input type="text" name="nationalid" id="nationalid" class="text ui-widget-content ui-corner-all" size="30"/>
+
+				</div>
+				
+				<div id="submit-dialog-confirm" title="确定要提交吗?">
+					<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>请选择确定,并检查后提交试卷.</p>
+				</div>
+				
+				<div class="button-body-btn" align="right">
+					<span id="employee_info_area" style="text-align:right"></span>
+					<input type="button" value="登录" class="btn001" id="loginButton"/>
+					<input type="button" value="退出" class="btn001" id="logoutButton" style="display: none"/>
+				</div>
+				<div class="button-body-btn" align="right" style="display:none">
+					单选题数量: <input type="text" value="40" id="singleCount" onkeyup="validateAndCheck('S')"/>
+					多选题数量: <input type="text" value="30" id="multipleCount" onkeyup="validateAndCheck('M')"/>
+					<input type="button" value="重置题目" class="btn001" id="refreshQuest" onclick="refresh_quest()"/>
+				</div>
+				<div id="score_area">
+				</div>
+				<div id="quest_content_id" class="middle-body-content">
+					<!--
+					<div class="r-qu-body">
+						<div class="r-qu-body-title">
+							1、
+							<p>世界上第一条地铁建于（C）城市。</p>
+							[单选题]
+						</div>
+						<div class="r-qu-body-content">
+							<ul class="r-qu-body-ul1 ">
+								<li>
+									<ul class="quItem-ul">
+										<li><input type="radio" name="qu_RADIO_2c9182af458848340145891b96930004" value="2c9182af458848340145891b96930005" /></li>
+										<li class="quItemOptionName rd_ck"><p>纽约</p></li>
+									</ul>
+								</li>
+							</ul>
+							<div style="clear: both;"></div>
+							<div class="quItemNote"></div>
+						</div>
+					</div>
+					-->
+					
+					<!-- 
+					<div class="r-qu-body">
+						<div class="r-qu-body-title">
+							9、
+							<p>城市轨道交通具有以下哪些特点</p>
+							[多选题]
+						</div>
+						<div class="r-qu-body-content">
+							<input type="hidden" name="qu_CHECKBOX_2c9182af458848340145891b9a67002f" value="tag_qu_CHECKBOX_2c9182af458848340145891b9a67002f_" />
+							<ul class="r-qu-body-ul1 ">
+								<li>
+									<ul class="quItem-ul">
+										<li><input type="checkbox" name="tag_qu_CHECKBOX_2c9182af458848340145891b9a67002f_2c9182af458848340145891b9a680030" value="2c9182af458848340145891b9a680030" /></li>
+										<li class="quItemOptionName rd_ck"><p>快捷</p></li>
+									</ul>
+								</li>
+								<li>
+									<ul class="quItem-ul">
+										<li><input type="checkbox" name="tag_qu_CHECKBOX_2c9182af458848340145891b9a67002f_2c9182af458848340145891b9a680031" value="2c9182af458848340145891b9a680031" /></li>
+										<li class="quItemOptionName rd_ck"><p>安全</p></li>
+									</ul>
+								</li>
+								<li>
+									<ul class="quItem-ul">
+										<li><input type="checkbox" name="tag_qu_CHECKBOX_2c9182af458848340145891b9a67002f_2c9182af458848340145891b9a680032" value="2c9182af458848340145891b9a680032" /></li>
+										<li class="quItemOptionName rd_ck"><p>大运量</p></li>
+									</ul>
+								</li>
+								<li>
+									<ul class="quItem-ul">
+										<li><input type="checkbox" name="tag_qu_CHECKBOX_2c9182af458848340145891b9a67002f_2c9182af458848340145891b9a680033" value="2c9182af458848340145891b9a680033" /></li>
+										<li class="quItemOptionName rd_ck"><p>低耗能</p></li>
+									</ul>
+								</li>
+							</ul>
+							<div style="clear: both;"></div>
+							<div class="quItemNote"></div>
+						</div>
+					</div>
+					 -->
+				</div>
+
+				<div class="button-body-btn" style="height: 50px">
+						<span style="float: left">
+							<input type="button" value="上一页" class="btn001" id="previousPage" onclick="movePage(-1)" style="display: none"/>
+							<input type="button" value="下一页" class="btn001" id="nextPage" onclick="movePage(1)" style="display: none"/>
+						</span>
+						<span style="float: right">
+							<input type="button" value="提交" class="btn001" id="subSurveyAnswer" style="display: none"/>
+						</span>
+				</div>
+			</form>
+		</div>
+
+		<div id="footer_wrapper">
+			<!-- 
+			<div class="footer_menu">
+				<ul>
+					<li><a href="/index.jsp" class="currentNav">首页</a></li>
+					<li><a href="/survey!sharelist.action">问卷库</a></li>
+					<li><a href="/survey.action">在线问卷</a></li>
+					<li><a href="/survey-edu.action">问卷学院</a></li>
+				</ul>
+			</div>
+			 -->
+			<div id="footer">
+				Copyright © 2014 四号线乘务一组 版权所有 All Rights Reserved.
+				<span>&nbsp;
+				</span>
+				<div class="cleaner"></div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
+
+
+
